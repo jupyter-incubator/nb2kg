@@ -121,11 +121,13 @@ class KernelGatewayWSClient(LoggingConfigurable):
         parameters = {
           "headers" : KG_HEADERS,
           "validate_cert" : VALIDATE_KG_CERT,
-          "auth_username" : KG_HTTP_USER, 
-          "auth_password" : KG_HTTP_PASS,
           "connect_timeout" : KG_CONNECT_TIMEOUT,
           "request_timeout" : KG_REQUEST_TIMEOUT
         }
+        if KG_HTTP_USER:
+            parameters["auth_username"] = KG_HTTP_USER
+        if KG_HTTP_PASS:
+            parameters["auth_password"] = KG_HTTP_PASS
         if KG_CLIENT_KEY:
             parameters["client_key"] = KG_CLIENT_KEY
             parameters["client_cert"] = KG_CLIENT_CERT
